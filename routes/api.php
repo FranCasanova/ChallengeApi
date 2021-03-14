@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/topsecret', 'App\Http\Controllers\TransmissionController@store');
 
+Route::get('/topsecret_split', 'App\Http\Controllers\TransmissionController@get_split');
+
 Route::post('/topsecret_split/{satellite_name}', 'App\Http\Controllers\TransmissionController@store_split');
+
 
 

@@ -60,8 +60,10 @@ class TransmissionService implements TransmissionServiceInterface
                 'y' => $y
             ];
         }catch (Throwable $e) {
-            return response()->json(['error' => 'No se pudo determinar la posición'], 404);
-            // /return "No se pudo determinar la posición";
+            return [
+                'code' => 404,
+                'error' => "No se pudo determinar la posición"
+            ];
         }
     }
 
@@ -101,9 +103,13 @@ class TransmissionService implements TransmissionServiceInterface
                 }
             }
         }catch (Throwable $e) {
-            return response()->json(['error' => 'No se pudo determinar el mensaje'], 404);
+            return [
+                'code' => 404,
+                'error' => 'No se pudo determinar el mensaje'
+            ];
         }
-        return ($messageDecoded);
+
+        return implode(' ', $messageDecoded);
     }
 
     public function getMessagesDelay($messages, $messageLength){

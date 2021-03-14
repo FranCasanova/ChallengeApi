@@ -34,11 +34,7 @@ class MessageTest extends TestCase
         ];
         $message = $this->transmissionService->getMessage($messages);
         
-        $this->assertEquals('este', $message[0]);
-        $this->assertEquals('es', $message[1]);
-        $this->assertEquals('un', $message[2]);
-        $this->assertEquals('mensaje', $message[3]);
-        $this->assertEquals('secreto', $message[4]);
+        $this->assertEquals('este es un mensaje secreto', $message);
     }
 
     public function testMessageWithDelay(){
@@ -49,10 +45,7 @@ class MessageTest extends TestCase
         ];
         $message = $this->transmissionService->getMessage($messages);
         
-        $this->assertEquals('este', $message[0]);
-        $this->assertEquals('es', $message[1]);
-        $this->assertEquals('un', $message[2]);
-        $this->assertEquals('mensaje', $message[3]);
+        $this->assertEquals('este es un mensaje', $message);
     }
 
     public function testFailingMessageWithDiferentLengths(){
@@ -63,8 +56,8 @@ class MessageTest extends TestCase
         ];
         $response = $this->transmissionService->getMessage($messages);
 
-        $this->assertIsString($this->parseResponse($response)->error);
-        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertIsString($response['error']);
+        $this->assertEquals(404, $response['code']);
     }
 
 }

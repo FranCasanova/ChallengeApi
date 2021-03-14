@@ -10,7 +10,7 @@ use App\Repositories\Transmissions\TransmissionRepository;
 
 class LocationTest extends TestCase
 {
-    
+    use RefreshDatabase;
     protected $transmissionService;
 
     protected function setUp(): void
@@ -32,6 +32,7 @@ class LocationTest extends TestCase
     }
 
     public function testAbortingWith404OnError(){
+        $this->withoutExceptionHandling();
         //pasamos solo 2 distancias para que haya una exception
         $distances = [
             1, 
@@ -39,7 +40,7 @@ class LocationTest extends TestCase
         ];
         $response = $this->transmissionService->getLocation($distances);
 
-        $this->assertIsString($this->parseResponse($response)->error);
-        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertIsString($response['error']);
+        $this->assertEquals(404, $response['code']);
     }
 }
