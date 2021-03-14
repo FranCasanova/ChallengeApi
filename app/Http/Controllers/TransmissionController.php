@@ -28,7 +28,8 @@ class TransmissionController extends Controller
         if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
         return response()->json(['error' => $distressSignal['position']['error']], 404);
 
-        if(array_key_exists('code', $distressSignal['message']) && $distressSignal['message']['code'] == 404) 
+        if( is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) && 
+            $distressSignal['message']['code'] == 404) 
         return response()->json(['error' => $$distressSignal['message']['error']], 404);
 
         return $distressSignal;
@@ -41,7 +42,8 @@ class TransmissionController extends Controller
         if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
         return response()->json(['error' => $distressSignal['position']['error']], 404);
 
-        if(array_key_exists('code', $distressSignal['message']) && $distressSignal['message']['code'] == 404) 
+        if(is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) && 
+            $distressSignal['message']['code'] == 404) 
         return response()->json(['error' => $$distressSignal['message']['error']], 404);
 
         return $distressSignal;
@@ -56,7 +58,8 @@ class TransmissionController extends Controller
         if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
         return response()->json(['error' => $distressSignal['position']['error']], 404);
 
-        if(array_key_exists('code', $distressSignal['message']) && $distressSignal['message']['code'] == 404) 
+        if(is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) 
+            && $distressSignal['message']['code'] == 404) 
         return response()->json(['error' => $$distressSignal['message']['error']], 404);
 
         return $distressSignal;
