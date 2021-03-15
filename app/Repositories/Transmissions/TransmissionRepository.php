@@ -24,11 +24,10 @@ class TransmissionRepository implements TransmissionRepositoryInterface
 
     public function getLastTransmissions(){
         //Toma las ultimas transmisiones de cada satellite 
-        return Transmission::take(3)->get()->unique('satellite_name')
-                            ->sortByDesc('created_at');
+        return Transmission::orderBy('created_at', 'desc')->get()->unique('satellite_name')->take(3);
     }
 
     public function getSatellites(){
-        return Satellite::take(3)->get()->unique('name')->sortByDesc('created_at');
+        return Satellite::orderBy('created_at', 'desc')->get()->unique('name')->take(3);
     }
 }

@@ -22,9 +22,9 @@ class LocationTest extends TestCase
 
     public function testSimpleMessageWithNoDelay(){
         $distances = [
-            669.042,
+            669.04,
             200.0,
-            401.086
+            401.08
         ];
         $position = $this->transmissionService->getLocation($distances);
         

@@ -28,7 +28,6 @@ class TransmissionService implements TransmissionServiceInterface
 
     public function getTopSecret(){
         $transmissions = $this->transmissionRepository->getLastTransmissions();
-        
         return [
             'position' => $this->getLocation($transmissions->pluck('distance')),
             'message' => $this->getMessage($transmissions->pluck('message'))
