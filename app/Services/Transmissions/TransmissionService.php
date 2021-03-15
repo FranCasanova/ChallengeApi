@@ -60,10 +60,7 @@ class TransmissionService implements TransmissionServiceInterface
                 'y' => $y
             ];
         }catch (Throwable $e) {
-            return [
-                'code' => 404,
-                'error' => "No se pudo determinar la posición"
-            ];
+            abort( 404, 'No se pudo determinar la posición');
         }
     }
 
@@ -103,10 +100,7 @@ class TransmissionService implements TransmissionServiceInterface
                 }
             }
         }catch (Throwable $e) {
-            return [
-                'code' => 404,
-                'error' => 'No se pudo determinar el mensaje'
-            ];
+            abort( 404, 'No se pudo determinar el mensaje');
         }
 
         return implode(' ', $messageDecoded);

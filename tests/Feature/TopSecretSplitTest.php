@@ -61,7 +61,7 @@ class TopSecretSplitTest extends TestCase
 
     public function test404BecauseOfMissingPreviousSatellitesInfo()
     {
-        
+        $this->withoutExceptionHandling();
         $response = $this->post('/api/topsecret_split/kenobi', [
             'distance' =>  100.0,
             'message' =>  ["este", "", "", "mensaje"]
@@ -77,7 +77,7 @@ class TopSecretSplitTest extends TestCase
             'distance' =>  100.0,
             'message' =>  ["este", "", "", "mensaje"]
         ]);
-
+        
         $response->assertStatus(302);
 
     }

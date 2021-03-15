@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Services\Transmissions\TransmissionService;
 use App\Repositories\Transmissions\TransmissionRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LocationTest extends TestCase
 {
@@ -32,15 +33,15 @@ class LocationTest extends TestCase
     }
 
     public function testAbortingWith404OnError(){
-        $this->withoutExceptionHandling();
+        
+        $this->expectException(NotFoundHttpException::class);
+
         //pasamos solo 2 distancias para que haya una exception
         $distances = [
             1, 
             1, 
         ];
-        $response = $this->transmissionService->getLocation($distances);
 
-        $this->assertIsString($response['error']);
-        $this->assertEquals(404, $response['code']);
+        $response = $this->transmissionService->getLocation($distances);
     }
 }

@@ -23,45 +23,31 @@ class TransmissionController extends Controller
 
         $this->transmissionService->store($request->satellites);
 
-        $distressSignal = $this->transmissionService->getTopSecret();
+        try {
+            return $this->transmissionService->getTopSecret();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 404);
+        }
 
-        if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
-        return response()->json(['error' => $distressSignal['position']['error']], 404);
-
-        if( is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) && 
-            $distressSignal['message']['code'] == 404) 
-        return response()->json(['error' => $$distressSignal['message']['error']], 404);
-
-        return $distressSignal;
     }
 
-    public function get_split(Request $request){
-
-        $distressSignal = $this->transmissionService->getTopSecret();
+    public function get_split(){
+        try {
+            return $this->transmissionService->getTopSecret();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 404);
+        }
         
-        if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
-        return response()->json(['error' => $distressSignal['position']['error']], 404);
-
-        if(is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) && 
-            $distressSignal['message']['code'] == 404) 
-        return response()->json(['error' => $$distressSignal['message']['error']], 404);
-
-        return $distressSignal;
     }
 
     public function store_split(StoreSatelliteSplitRequest $request){
 
         $this->transmissionService->store_split($request->satellite);
-
-        $distressSignal = $this->transmissionService->getTopSecret();
+        try {
+            return $this->transmissionService->getTopSecret();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 404);
+        }
         
-        if(array_key_exists('code', $distressSignal['position']) && $distressSignal['position']['code'] == 404) 
-        return response()->json(['error' => $distressSignal['position']['error']], 404);
-
-        if(is_array($distressSignal['message']) && array_key_exists('code', $distressSignal['message']) 
-            && $distressSignal['message']['code'] == 404) 
-        return response()->json(['error' => $$distressSignal['message']['error']], 404);
-
-        return $distressSignal;
     }
 }

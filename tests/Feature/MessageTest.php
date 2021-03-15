@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Repositories\Transmissions\TransmissionRepository;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Services\Transmissions\TransmissionService;
+use App\Repositories\Transmissions\TransmissionRepository;
 use App\Services\Transmissions\TransmissionServiceInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MessageTest extends TestCase
 {
@@ -49,6 +50,9 @@ class MessageTest extends TestCase
     }
 
     public function testFailingMessageWithDiferentLengths(){
+
+        $this->expectException(NotFoundHttpException::class);
+        
         $messages = [
             ['', '', 'es', '', 'mensaje'],
             ['', '', 'este', '', 'un', 'otro', 'mensaje', 'distinto'],
@@ -56,8 +60,6 @@ class MessageTest extends TestCase
         ];
         $response = $this->transmissionService->getMessage($messages);
 
-        $this->assertIsString($response['error']);
-        $this->assertEquals(404, $response['code']);
     }
 
 }
