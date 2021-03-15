@@ -75,7 +75,6 @@ class TransmissionService implements TransmissionServiceInterface
         try {
             $delay = $this->getMessagesDelay($messages, $messageLength);
 
-
             for ($i=0; $i < $messageLength; $i++) { 
 
                 if ($i < count($messages[0]) && $i+$delay[0] < $messageLength &&
@@ -106,20 +105,19 @@ class TransmissionService implements TransmissionServiceInterface
     }
 
     public function getMessagesDelay($messages, $messageLength){
+        $delay = [0, 0, 0];
         for ($i=1; $i < $messageLength; $i++) { 
-            $delay = [0, 0, 0];
-
             if ($i < count($messages[0]) && $messages[0][$i] != '' &&
                 ($messages[0][$i] ==  $messages[1][$i-1] ||
-                $messages[0][$i] ==  $messages[2][$i-1])) $delay[0] = +1;
+                $messages[0][$i] ==  $messages[2][$i-1])) $delay[0] = 1;
 
             if ($i < count($messages[1]) && $messages[1][$i] != '' &&
                 ($messages[1][$i] ==  $messages[0][$i-1] ||
-                $messages[1][$i] ==  $messages[2][$i-1])) $delay[1] = +1;
+                $messages[1][$i] ==  $messages[2][$i-1])) $delay[1] = 1;
 
             if ($i < count($messages[2]) && $messages[2][$i] != '' &&
                 ($messages[2][$i] ==  $messages[0][$i-1] ||
-                $messages[2][$i] ==  $messages[1][$i-1])) $delay[2] = +1;
+                $messages[2][$i] ==  $messages[1][$i-1])) $delay[2] = 1;
         }
         return $delay;
     }

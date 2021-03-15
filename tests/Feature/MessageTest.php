@@ -62,4 +62,17 @@ class MessageTest extends TestCase
 
     }
 
+    public function testHardMessageWithDelay(){
+        $full_message = 'Los droides separatistas espias han detectado que el general Obi-Wan Kenobi se encuentra en la nave del canciller Palpatine';
+
+        $messages = [
+            ['', 'droides', '', 'espias', 'han', '', '', '', 'general', '', 'Kenobi', 'se', '', '', 'la', 'nave', 'del', '', ''],
+            ['Los', 'droides', '', '', '', 'detectado', 'que', 'el', '', 'Obi-Wan', 'Kenobi', 'se', 'encuentra', 'en', '', '', '', 'canciller', 'Palpatine'],
+            ['', 'Los', 'droides', 'separatistas', 'espias', '', '', 'que', 'el', '', '', 'Kenobi', '', '', 'en', 'la', '', 'del', 'canciller', '', '']
+        ];
+        $message = $this->transmissionService->getMessage($messages);
+        
+        $this->assertEquals($full_message, $message);
+    }
+
 }
